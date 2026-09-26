@@ -1,0 +1,664 @@
+<title>Tierra Nueva · Expoagro 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F3F4F1; --panel:#E7EAE5; --ink:#16211C; --muted:#56625B; --line:#C6CDC7;
+  --accent:#A87A1F; --accent-soft:#EFE3C6; --blue:#1C4FA0; --soil:#8A6A48; --soil-soft:#D9CBB8;
+  --water:#6C9CC8; --good:#2F7A4C; --warn:#A8561F;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F1411; --panel:#172019; --ink:#E6EBE6; --muted:#9BA69F; --line:#2B352F;
+    --accent:#D9A94A; --accent-soft:#3A2F17; --blue:#7EA5EC; --soil:#B89572; --soil-soft:#3A3024;
+    --water:#4E7FAE; --good:#6CC08C; --warn:#E08A4F;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F1411; --panel:#172019; --ink:#E6EBE6; --muted:#9BA69F; --line:#2B352F;
+  --accent:#D9A94A; --accent-soft:#3A2F17; --blue:#7EA5EC; --soil:#B89572; --soil-soft:#3A3024;
+  --water:#4E7FAE; --good:#6CC08C; --warn:#E08A4F;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.02;text-wrap:balance;margin:0;letter-spacing:.01em}
+h2{font-size:clamp(2rem,4.6vw,3rem);text-transform:uppercase}
+h3{font-size:1.45rem;text-transform:uppercase;font-weight:600;letter-spacing:.02em}
+p{margin:0;max-width:68ch}
+a{color:var(--blue)}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+section{display:grid;gap:22px;padding-block:56px;border-top:1px solid var(--line)}
+.lead{font-size:1.15rem;max-width:62ch}
+.muted{color:var(--muted)}
+
+/* Header */
+header{display:grid;gap:28px;padding-block:44px 48px}
+.masthead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline}
+.title{font-size:clamp(4rem,13vw,9.5rem);text-transform:uppercase;line-height:.86}
+.title span{color:var(--accent)}
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border:1px solid var(--ink)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:2px}
+.ficha b{font-family:var(--mono);font-weight:500;font-size:1rem;font-variant-numeric:tabular-nums}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);padding:14px 16px;font-size:.95rem;max-width:none}
+.note p{max-width:none}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.stat{background:var(--ground);padding:16px;display:grid;gap:4px;align-content:start}
+.stat b{font-family:var(--display);font-size:2.3rem;line-height:1;font-weight:800}
+.stat span{font-size:.88rem;color:var(--muted)}
+
+/* Two col */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.pillar{border-top:3px solid var(--ink);padding-top:12px;display:grid;gap:6px;align-content:start}
+.pillar .k{font-family:var(--display);font-size:1.9rem;font-weight:800;text-transform:uppercase;line-height:1}
+.pillar p{font-size:.95rem}
+
+/* Idea block */
+.idea{background:var(--ink);color:var(--ground);padding:clamp(22px,4vw,40px);display:grid;gap:18px}
+.idea h3{color:var(--accent);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}
+.idea p{color:var(--ground);opacity:.92}
+.idea .eyebrow{color:var(--ground);opacity:.7}
+
+/* Tables */
+.tbl{overflow-x:auto;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--panel)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+
+/* Plans */
+figure{margin:0;display:grid;gap:10px}
+.plan{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+.plan svg{display:block;width:100%;min-width:600px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);max-width:none}
+svg text{font-family:var(--mono);fill:var(--ink)}
+svg .lbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+svg .sub{font-size:9.5px;fill:var(--muted)}
+svg .big{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:.03em}
+.z-lot{fill:var(--ground);stroke:var(--ink);stroke-width:2}
+.z-zone{fill:var(--ground);stroke:var(--ink);stroke-width:1}
+.z-pav{fill:var(--panel);stroke:var(--blue);stroke-width:2}
+.z-glass{fill:none;stroke:var(--blue);stroke-width:1;stroke-dasharray:2 3}
+.z-hero{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5}
+.z-contour{fill:none;stroke:var(--accent);stroke-width:1;opacity:.8}
+.z-soil{fill:var(--soil-soft);stroke:var(--soil);stroke-width:1}
+.z-stage{fill:var(--ink);stroke:var(--ink)}
+.car{fill:var(--ground);stroke:var(--ink);stroke-width:1.3}
+.car-hero{fill:var(--accent);stroke:var(--ink);stroke-width:1.3}
+.desk{fill:var(--ground);stroke:var(--ink);stroke-width:.9}
+.lane{fill:none;stroke:var(--soil-soft);stroke-width:50;stroke-linejoin:round}
+.lane-edge{fill:none;stroke:var(--soil);stroke-width:1;stroke-dasharray:6 5}
+.lane-c{fill:none;stroke:var(--soil);stroke-width:1.2;stroke-dasharray:3 5}
+.mk circle{fill:var(--ink)}
+.mk text{fill:var(--ground);font-size:11px;font-weight:500;text-anchor:middle;dominant-baseline:central}
+.street{fill:var(--ink)}
+.street-t{fill:var(--ground);font-size:11px;letter-spacing:.3em}
+.dim{stroke:var(--muted);stroke-width:1}
+.dim-t{font-size:10px;fill:var(--muted)}
+
+/* Lists */
+.obst{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px 24px;padding:0;margin:0;list-style:none}
+.obst li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:.93rem}
+.obst .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--ground);font-family:var(--mono);font-size:.8rem;display:grid;place-items:center;margin-top:2px}
+.obst b{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
+.chips li{border:1px solid var(--line);padding:4px 10px;font-size:.85rem;background:var(--ground)}
+ul.plain{margin:0;padding-left:1.1em;display:grid;gap:6px;max-width:68ch}
+
+/* Run of show */
+.ros{display:grid;gap:0;border-left:2px solid var(--ink);margin-left:6px}
+.ros div{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:10px 0 10px 16px;position:relative}
+.ros div::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;background:var(--ground);border:2px solid var(--ink);border-radius:50%}
+.ros div.peak::before{background:var(--accent);border-color:var(--accent)}
+.ros time{font-family:var(--mono);font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ros p{font-size:.95rem}
+
+/* Renders */
+.renders{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.render{border:1px solid var(--line);padding:14px;display:grid;gap:8px;align-content:start;background:var(--ground)}
+.render h4{margin:0;font-family:var(--body);font-size:1rem}
+.render code{font-family:var(--mono);font-size:.78rem;line-height:1.5;color:var(--muted);display:block;background:var(--panel);padding:10px;white-space:pre-wrap}
+
+.gantt{display:grid;gap:6px;min-width:640px}
+.grow{display:grid;grid-template-columns:190px repeat(24,1fr);align-items:center;font-size:.85rem;gap:0}
+.grow .bar{height:14px;background:var(--blue)}
+.grow .bar.a{background:var(--accent)}
+.grow .bar.s{background:var(--soil)}
+.ghead{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-transform:uppercase}
+.ghead span{border-left:1px solid var(--line);padding-left:3px}
+
+.src{font-size:.85rem;columns:2 300px;column-gap:28px;padding-left:1.1em;margin:0}
+.src li{break-inside:avoid;margin-bottom:6px}
+footer{padding-top:28px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+@media (max-width:560px){ .ros div{grid-template-columns:56px 1fr} }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="masthead">
+    <span class="eyebrow">Propuesta de activación · Volkswagen Argentina · Borrador v1 · 26/09/2026</span>
+    <span class="eyebrow">Área de Eventos</span>
+  </div>
+  <h1 class="title">Tierra<br><span>Nueva</span></h1>
+  <p class="lead">La nueva Amarok hecha en Pacheco se presenta al campo como el campo guarda lo más valioso que tiene: dentro de un silobolsa. Se corta, se revela y baja del escenario directo a la pista. Es la primera vuelta pública de la pick-up en Argentina, y la hace el público.</p>
+  <div class="ficha">
+    <div><span class="eyebrow">Feria</span><b>Expoagro 2027 · Ed. YPF Agro</b></div>
+    <div><span class="eyebrow">Fechas</span><b>9 al 12 mar 2027</b></div>
+    <div><span class="eyebrow">Predio</span><b>Ferial y Autódromo · San Nicolás · RN9 km 225</b></div>
+    <div><span class="eyebrow">Lote A · Stand</span><b>2.400 m²</b></div>
+    <div><span class="eyebrow">Lote B · Pista + escenario</span><b>≈ 3.000 m² (2 lotes)</b></div>
+    <div><span class="eyebrow">Unidades en exhibición</span><b>12 + 2 develación</b></div>
+  </div>
+  <div class="note"><p><b>Antes de avanzar a proyecto ejecutivo:</b> las fotos de los lotes y el pliego de la pista no llegaron adjuntos. Las plantas usan medidas supuestas (Lote A 60 × 40 m; Lote B 60 × 50 m, calle al frente) y una lista de obstáculos a validar con el pliego. Con las fotos y el pliego ajusto orientación, cotas y obstáculos.</p></div>
+</header>
+
+<!-- 1. FERIA -->
+<section id="feria">
+  <span class="eyebrow">01 · La feria</span>
+  <h2>Qué es Expoagro hoy</h2>
+  <p class="lead">Es la muestra agroindustrial a cielo abierto más grande de la región. La organiza Exponenciar y desde 2025 lleva el nombre YPF Agro (acuerdo renovado hasta 2027). El público es productor, contratista, familia rural y concesionario, y va a comprar: en 2026 se pidieron créditos por más de US$ 10.000 millones.</p>
+  <div class="stats">
+    <div class="stat"><b class="mono">250.000</b><span>visitantes en 2026 (récord, 20ª edición)</span></div>
+    <div class="stat"><b class="mono">+700</b><span>expositores</span></div>
+    <div class="stat"><b class="mono">US$ 10.000 M</b><span>en solicitudes de crédito</span></div>
+    <div class="stat"><b class="mono">7</b><span>auditorios en simultáneo</span></div>
+    <div class="stat"><b class="mono">4 días</b><span>9 al 12 de marzo de 2027</span></div>
+  </div>
+  <div class="cols">
+    <div style="display:grid;gap:10px">
+      <h3>Qué hizo VW en 2026</h3>
+      <ul class="plain">
+        <li>Stand renovado centrado en comerciales, posventa y financiación.</li>
+        <li>Presentó la <b>Amarok V6 Unlimited</b>: 500 unidades numeradas, la serie que despide la generación actual.</li>
+        <li>Camiones Constellation, Meteor y Delivery.</li>
+        <li>Simulador Amarok RC off-road con Shell Helix.</li>
+        <li>"VW Store" con lifestyle y la colección de bicicletas VW.</li>
+        <li>Financiación 0 % en dólares a 36 meses, exclusiva de la feria.</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h3>Qué hizo la competencia</h3>
+      <ul class="plain">
+        <li><b>Grupo Antelo</b> (Mitsubishi, GWM, Changan, JMEV): stand de más de 9.000 m² con pista off-road y on-road en Expoagro 2026.</li>
+        <li><b>Ford</b> en AgroActiva 2026: pista off-road de 1.800 m² con turnos, clientes y no clientes.</li>
+        <li><b>Expo Rural 2026</b>: Zona Off Road compartida por Hilux, Amarok, Titano y BYD Shark, con acompañante piloto.</li>
+        <li><b>Fiat/Ram</b>: gama pick-up completa, con la Titano cordobesa como protagonista.</li>
+      </ul>
+      <p class="muted" style="font-size:.93rem">Lectura: en metros cuadrados no se gana. Hay que ganar con lo que ningún otro tiene en 2027, que es una pick-up nueva, hecha acá y que se puede manejar el día que se presenta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. TIMING -->
+<section id="timing">
+  <span class="eyebrow">02 · El momento</span>
+  <h2>Expoagro 2027 cae en la ventana de lanzamiento de la nueva Amarok</h2>
+  <div class="cols">
+    <p>VW invierte US$ 580 millones en General Pacheco para la nueva generación de Amarok (plataforma de base SAIC Maxus adaptada por VW para Sudamérica). Ya la mostró camuflada en la Festa do Peão de Barretos, en Brasil, y anticipó una versión híbrida enchufable de más de 470 CV. La prensa ubica el lanzamiento comercial entre marzo y abril de 2027, y la producción arrancaría hacia diciembre de 2026.</p>
+    <p>Expoagro, del 9 al 12 de marzo, puede ser el debut argentino frente a su cliente natural. Toda la propuesta está pensada para ese escenario. <b>Hay que confirmarlo con VW:</b> si la develación finalmente es de otro modelo o versión, el mecanismo (silobolsa, corte, bajada a pista) se sostiene igual.</p>
+  </div>
+</section>
+
+<!-- 3. IDEA -->
+<section id="idea">
+  <span class="eyebrow">03 · La idea</span>
+  <div class="idea">
+    <span class="eyebrow">Concepto disruptivo</span>
+    <h3>La cosecha no se muestra. Se abre.</h3>
+    <p>En el campo argentino, lo que más vale se guarda en silobolsa. Las dos nuevas Amarok llegan al escenario embolsadas en un silobolsa real de 9 pies, impreso con el camuflaje que VW usó en Barretos. El primer día, un productor dueño de una Amarok y un operario de la planta de Pacheco hacen el corte con el calador. La bolsa cae, el LED muestra el amanecer sobre un lote y las dos camionetas bajan del escenario por rampa directo a la pista. Esa primera vuelta es pública y se transmite en la pantalla.</p>
+    <p>Ninguna marca en ferias del agro del mundo usa un objeto propio del productor como mecanismo de develación. Y después del corte, el plástico de esa bolsa se convierte en las bolsas numeradas que se lleva la gente.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><span class="eyebrow">Lote A</span><span class="k">Ver</span><p><b>La Loma:</b> cinco Amarok sobre un relieve de tierra en terrazas, al frente del stand, visible desde la calle.</p></div>
+    <div class="pillar"><span class="eyebrow">Lote B</span><span class="k">Probar</span><p><b>Circuito La Chacra:</b> cada obstáculo reproduce una situación real del campo y la explica con datos en vivo.</p></div>
+    <div class="pillar"><span class="eyebrow">Lote A</span><span class="k">Cerrar</span><p><b>El pabellón:</b> vidriado y climatizado, con 12 escritorios, galería con livings y sala de cierre.</p></div>
+    <div class="pillar"><span class="eyebrow">Lote A</span><span class="k">Llevarse</span><p><b>El Almacén VW:</b> lifestyle, bicicletas y posventa, con bordado en vivo de la marca de hacienda de cada cliente.</p></div>
+  </div>
+</section>
+
+<!-- 4. REFERENCIAS -->
+<section id="referencias">
+  <span class="eyebrow">04 · Relevamiento internacional</span>
+  <h2>Ferias del agro que marcan el estándar</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Feria</th><th>Dónde</th><th class="num">Escala</th><th>Qué hacen</th><th>Qué tomamos</th></tr></thead>
+      <tbody>
+        <tr><td><b>Agritechnica</b></td><td>Hannover, Alemania</td><td class="num">476.000 visit.<br>2.849 expos.</td><td>Días temáticos, "Spotlights" y escenarios de expertos. El contenido ordena la visita.</td><td>Una agenda por día en el escenario (tecnología, financiación, familia, dueños).</td></tr>
+        <tr><td><b>Farm Progress Show</b></td><td>Decatur, EE.UU.</td><td class="num">≈ 1 acre<br>por marca</td><td>Zona Ride &amp; Drive: pistas cercadas de unos 4.000 m² para que el visitante maneje.</td><td>Tratar la pista como producto, con turnos, registro y seguimiento comercial.</td></tr>
+        <tr><td><b>Agrishow</b></td><td>Ribeirão Preto, Brasil</td><td class="num">Toyota 1.700 m²</td><td>Toyota presentó la Hilux a biometano y combinó test drive con la versión de trabajo.</td><td>La versión tecnológica (híbrida) como imán de prensa y la de trabajo como venta.</td></tr>
+        <tr><td><b>Fieldays</b></td><td>Mystery Creek, N. Zelanda</td><td class="num">50 años Hilux</td><td>"House of Hilux": el stand cuenta las historias de los dueños.</td><td>El dueño como protagonista: 800.000 Amarok producidas en Pacheco.</td></tr>
+        <tr><td><b>Festa do Peão de Barretos</b></td><td>São Paulo, Brasil</td><td class="num">Cultura rural</td><td>VW mostró allí la nueva Amarok camuflada.</td><td>VW ya eligió el mundo rural para develar. Usamos ese camuflaje en el silobolsa.</td></tr>
+        <tr><td><b>AgroActiva</b></td><td>Armstrong, Argentina</td><td class="num">Ford 1.800 m²</td><td>Pista off-road con obstáculos de pendiente, tracción y vadeo.</td><td>Benchmark local: nuestra calzada ronda los 1.900 m² y es de circuito cerrado.</td></tr>
+        <tr><td><b>AgroActiva 2025 (VW)</b></td><td>Armstrong, Argentina</td><td class="num">1.480 particip.</td><td>Amarok RC, simulador de camiones y AR con Shell. Informe propio en Drive.</td><td>Sus aprendizajes: capturar leads por QR, integrar vendedores y entregar merchandising.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 5. LOTE A -->
+<section id="lote-a">
+  <span class="eyebrow">05 · Lote A · 2.400 m²</span>
+  <h2>El stand</h2>
+  <p class="lead">Se lee de adelante hacia atrás, igual que una decisión de compra. Primero la Loma con las cinco Amarok, después la gama, la galería y, al fondo, el pabellón donde se cierra la operación.</p>
+  <figure>
+    <div class="plan">
+      <svg viewBox="0 0 640 470" role="img" aria-label="Planta del Lote A, 60 por 40 metros">
+        <rect class="z-lot" x="20" y="20" width="600" height="400"/>
+        <!-- Pabellón -->
+        <rect class="z-pav" x="40" y="20" width="560" height="120"/>
+        <line class="z-glass" x1="40" y1="138" x2="600" y2="138"/>
+        <line x1="240" y1="20" x2="240" y2="140" stroke="var(--blue)"/>
+        <line x1="400" y1="20" x2="400" y2="140" stroke="var(--blue)"/>
+        <line x1="480" y1="20" x2="480" y2="140" stroke="var(--blue)"/>
+        <line x1="400" y1="80" x2="480" y2="80" stroke="var(--blue)"/>
+        <text class="lbl" x="52" y="40">Recepción + livings</text><text class="sub" x="52" y="54">240 m² · 20 × 12 m</text>
+        <path d="M110 118 q30 -22 60 0" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <circle cx="80" cy="80" r="11" class="desk"/><circle cx="120" cy="75" r="11" class="desk"/><circle cx="195" cy="78" r="11" class="desk"/><circle cx="220" cy="100" r="9" class="desk"/>
+        <text class="lbl" x="250" y="40">Oficina comercial</text><text class="sub" x="250" y="54">192 m² · 12 escritorios</text>
+        <g>
+          <rect class="desk" x="256" y="66" width="16" height="8"/><rect class="desk" x="292" y="66" width="16" height="8"/><rect class="desk" x="328" y="66" width="16" height="8"/><rect class="desk" x="364" y="66" width="16" height="8"/>
+          <rect class="desk" x="256" y="92" width="16" height="8"/><rect class="desk" x="292" y="92" width="16" height="8"/><rect class="desk" x="328" y="92" width="16" height="8"/><rect class="desk" x="364" y="92" width="16" height="8"/>
+          <rect class="desk" x="256" y="118" width="16" height="8"/><rect class="desk" x="292" y="118" width="16" height="8"/><rect class="desk" x="328" y="118" width="16" height="8"/><rect class="desk" x="364" y="118" width="16" height="8"/>
+        </g>
+        <text class="lbl" x="408" y="40">Cierre</text><text class="sub" x="408" y="54">48 m² · VIP</text>
+        <text class="lbl" x="408" y="100">Backoffice</text><text class="sub" x="408" y="114">48 m² · café</text>
+        <text class="lbl" x="488" y="40">Servicios</text><text class="sub" x="488" y="54">144 m²</text><text class="sub" x="488" y="68">baños · depósito</text><text class="sub" x="488" y="82">tablero · HVAC</text>
+        <!-- Galería -->
+        <rect class="z-zone" x="180" y="140" width="420" height="40" fill="var(--panel)"/>
+        <text class="lbl" x="190" y="158">Galería semicubierta · livings</text><text class="sub" x="190" y="172">168 m² · deck de madera · mate y café</text>
+        <!-- Almacén -->
+        <rect class="z-soil" x="40" y="140" width="120" height="140"/>
+        <text class="lbl" x="50" y="160">Almacén VW</text><text class="sub" x="50" y="174">168 m² · lifestyle</text>
+        <circle cx="70" cy="215" r="9" fill="none" stroke="var(--ink)"/><circle cx="92" cy="215" r="9" fill="none" stroke="var(--ink)"/>
+        <circle cx="115" cy="240" r="9" fill="none" stroke="var(--ink)"/><circle cx="137" cy="240" r="9" fill="none" stroke="var(--ink)"/>
+        <line x1="50" y1="265" x2="150" y2="265" stroke="var(--ink)" stroke-width="3"/>
+        <!-- Gama -->
+        <rect class="z-zone" x="180" y="180" width="420" height="100" fill="none" stroke-dasharray="4 4"/>
+        <text class="lbl" x="190" y="198">Gama · 7 unidades</text><text class="sub" x="190" y="212">420 m²</text>
+        <g>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(222 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(279 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(336 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(393 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(450 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(507 242) rotate(30)"/>
+          <rect class="car" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(564 242) rotate(30)"/>
+        </g>
+        <!-- La Loma -->
+        <rect class="z-hero" x="160" y="280" width="320" height="120"/>
+        <ellipse class="z-contour" cx="320" cy="360" rx="150" ry="36"/>
+        <ellipse class="z-contour" cx="320" cy="352" rx="100" ry="26"/>
+        <ellipse class="z-contour" cx="320" cy="344" rx="48" ry="16"/>
+        <g>
+          <rect class="car-hero" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(320 332)"/>
+          <rect class="car-hero" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(250 350) rotate(-15)"/>
+          <rect class="car-hero" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(390 350) rotate(15)"/>
+          <rect class="car-hero" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(190 368) rotate(-32)"/>
+          <rect class="car-hero" x="-9.5" y="-23" width="19" height="46" rx="4" transform="translate(450 368) rotate(32)"/>
+        </g>
+        <text class="big" x="170" y="300">LA LOMA</text><text class="sub" x="170" y="314">5 Amarok · 384 m²</text><text class="sub" x="170" y="327">cima +2,4 m</text>
+        <!-- Ingreso / Postventa -->
+        <rect class="z-zone" x="40" y="280" width="110" height="120"/>
+        <rect x="95" y="345" width="30" height="30" fill="var(--ink)"/>
+        <text class="lbl" x="48" y="300">Ingreso</text><text class="sub" x="48" y="314">tótem 18 m</text><text class="sub" x="48" y="328">QR registro</text>
+        <rect class="z-zone" x="490" y="280" width="110" height="120"/>
+        <rect x="524" y="325" width="42" height="62" fill="none" stroke="var(--blue)" stroke-width="2"/>
+        <rect class="car" x="535" y="333" width="19" height="46" rx="4"/>
+        <text class="lbl" x="498" y="300">Box posventa</text><text class="sub" x="498" y="314">Amarok en elevador</text>
+        <!-- Calle -->
+        <rect class="street" x="20" y="428" width="600" height="22"/>
+        <text class="street-t" x="320" y="443" text-anchor="middle">CALLE · FRENTE DEL LOTE</text>
+        <!-- Cotas -->
+        <line class="dim" x1="20" y1="462" x2="620" y2="462"/><text class="dim-t" x="320" y="459" text-anchor="middle">60 m</text>
+        <line class="dim" x1="630" y1="20" x2="630" y2="420"/><text class="dim-t" x="626" y="224" text-anchor="end" transform="rotate(-90 626 224)">40 m</text>
+      </svg>
+    </div>
+    <figcaption>Planta esquemática, escala 1:500 aprox. Medidas supuestas de 60 × 40 m, a ajustar con la foto y el plano del lote. En amarillo, las unidades hiperdestacadas.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Espacio</th><th>Qué pasa ahí</th><th class="num">m²</th></tr></thead>
+      <tbody>
+        <tr><td><b>La Loma</b></td><td>Relieve de tierra en tres terrazas (0 / +1,2 / +2,4 m) con césped y rastrojo real. La Amarok de la cima queda a 2,4 m sobre la calle. Iluminación rasante y cartelería con datos de campo: pendiente, vadeo, carga útil.</td><td class="num">384</td></tr>
+        <tr><td><b>Gama</b></td><td>7 unidades a 30° sobre piso de deck, con pantallas verticales de ficha y cotizador en tablet.</td><td class="num">420</td></tr>
+        <tr><td><b>Ingreso + tótem</b></td><td>Tótem de 18 m visible desde el acceso (altura a validar con pliego) y registro por QR con captura de leads.</td><td class="num">132</td></tr>
+        <tr><td><b>Box posventa</b></td><td>Amarok sobre elevador para ver el chasis, 4Motion y protección de cárter. Un técnico de la red explica mantenimiento, repuestos originales y garantía, con presencia de Shell Helix.</td><td class="num">132</td></tr>
+        <tr><td><b>Almacén VW</b></td><td>Volumen de chapa y madera tipo almacén de ramos generales, con bicicletas, indumentaria, accesorios Amarok y bordado en vivo.</td><td class="num">168</td></tr>
+        <tr><td><b>Galería</b></td><td>Semicubierta, con 4 livings y barra de mate y café. Es la antesala del pabellón.</td><td class="num">168</td></tr>
+        <tr><td><b>Pabellón vidriado</b></td><td>Recepción con livings (240), oficina comercial con 12 escritorios en 3 islas de 4 (192), sala de cierre VIP (48), backoffice y café (48), servicios (144). Climatizado, piso técnico elevado y DVH con control solar.</td><td class="num">672</td></tr>
+        <tr><td><b>Circulación y retiros</b></td><td>Pasillos de 2 m como mínimo y retiros perimetrales.</td><td class="num">324</td></tr>
+        <tr class="total"><td>Total</td><td></td><td class="num">2.400</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cols">
+    <div style="display:grid;gap:10px">
+      <h3>Las 5 Amarok de La Loma</h3>
+      <p style="font-size:.95rem">Depende de cómo convivan las dos generaciones en marzo de 2027. Hay dos caminos:</p>
+      <ul class="plain">
+        <li><b>Si la nueva ya se vende:</b> las 5 unidades son versiones de la nueva generación, con la híbrida en la cima.</li>
+        <li><b>Si todavía convive con la V6:</b> Extreme V6, Black Style V6, Highline V6, Hero V6 y la V6 Unlimited numerada en la cima, como despedida de la generación.</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h3>Las 7 de la gama</h3>
+      <ul class="chips">
+        <li>Saveiro Extreme CD</li><li>Taos Highline</li><li>Tiguan R-Line</li><li>T-Cross Extreme</li><li>Tera Outfit</li><li>Nivus</li><li>7ª a definir según portafolio 2027</li>
+      </ul>
+      <p class="muted" style="font-size:.9rem">Gama y versiones según precios publicados en 2026, a confirmar con VW para 2027. Las 2 unidades del escenario y la flota de pista van aparte de estas 12.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. LOTE B -->
+<section id="lote-b">
+  <span class="eyebrow">06 · Lote B · ≈ 3.000 m²</span>
+  <h2>Circuito La Chacra y escenario</h2>
+  <p class="lead">El escenario queda centrado y mira a la calle, con 30 m de ancho, la mitad del frente. Delante tiene una plaza abierta para el público. La pista rodea todo en un circuito cerrado de doble carril con dos horquillas al frente. Después de la develación, las camionetas bajan por las rampas traseras directo a la pista.</p>
+  <figure>
+    <div class="plan">
+      <svg viewBox="0 0 640 575" role="img" aria-label="Planta del Lote B con pista 4x4 y escenario">
+        <rect class="z-lot" x="20" y="20" width="600" height="500"/>
+        <!-- pista -->
+        <path class="lane" d="M140 440 L140 120 L500 120 L500 440 A45 45 0 0 0 590 440 L590 50 L50 50 L50 440 A45 45 0 0 0 140 440 Z"/>
+        <path class="lane-c" d="M140 440 L140 120 L500 120 L500 440 A45 45 0 0 0 590 440 L590 50 L50 50 L50 440 A45 45 0 0 0 140 440 Z"/>
+        <!-- stage -->
+        <rect class="z-stage" x="170" y="160" width="300" height="100"/>
+        <rect x="220" y="163" width="200" height="7" fill="var(--accent)"/>
+        <rect x="172" y="170" width="8" height="80" fill="var(--accent)"/>
+        <rect x="460" y="170" width="8" height="80" fill="var(--accent)"/>
+        <circle cx="270" cy="215" r="30" fill="none" stroke="var(--ground)" stroke-dasharray="3 3"/>
+        <circle cx="370" cy="215" r="30" fill="none" stroke="var(--ground)" stroke-dasharray="3 3"/>
+        <rect x="260" y="192" width="20" height="46" rx="6" fill="var(--ground)"/>
+        <rect x="360" y="192" width="20" height="46" rx="6" fill="var(--ground)"/>
+        <text x="320" y="250" text-anchor="middle" style="fill:var(--ground);font-size:10px;letter-spacing:.1em">ESCENARIO 30 × 10 m · LED 20 × 8 m</text>
+        <!-- ramps -->
+        <rect x="180" y="130" width="40" height="30" fill="var(--soil)" opacity=".85"/>
+        <rect x="420" y="130" width="40" height="30" fill="var(--soil)" opacity=".85"/>
+        <text class="sub" x="200" y="150" text-anchor="middle" style="fill:var(--ground)">rampa</text>
+        <text class="sub" x="440" y="150" text-anchor="middle" style="fill:var(--ground)">rampa</text>
+        <!-- plaza -->
+        <rect x="170" y="260" width="300" height="260" fill="var(--panel)" stroke="var(--ink)" stroke-width="1"/>
+        <text class="big" x="320" y="330" text-anchor="middle">PLAZA</text>
+        <text class="sub" x="320" y="346" text-anchor="middle">público de pie · ≈ 780 m²</text>
+        <rect x="300" y="390" width="40" height="22" fill="none" stroke="var(--ink)"/><text class="sub" x="320" y="405" text-anchor="middle">FOH</text>
+        <rect x="170" y="440" width="70" height="80" class="z-hero"/>
+        <text class="lbl" x="178" y="460">Fila</text><text class="sub" x="178" y="474">embarque</text><text class="sub" x="178" y="488">QR · casco</text>
+        <!-- markers -->
+        <g class="mk">
+          <g transform="translate(140 380)"><circle r="11"/><text>1</text></g>
+          <g transform="translate(140 290)"><circle r="11"/><text>2</text></g>
+          <g transform="translate(140 190)"><circle r="11"/><text>3</text></g>
+          <g transform="translate(320 120)"><circle r="11"/><text>4</text></g>
+          <g transform="translate(500 250)"><circle r="11"/><text>5</text></g>
+          <g transform="translate(545 485)"><circle r="11"/><text>6</text></g>
+          <g transform="translate(590 320)"><circle r="11"/><text>7</text></g>
+          <g transform="translate(320 50)"><circle r="11"/><text>8</text></g>
+          <g transform="translate(50 250)"><circle r="11"/><text>9</text></g>
+          <g transform="translate(95 485)"><circle r="11"/><text>10</text></g>
+        </g>
+        <!-- street -->
+        <rect class="street" x="20" y="528" width="600" height="22"/>
+        <text class="street-t" x="320" y="543" text-anchor="middle">CALLE · FRENTE DEL LOTE</text>
+        <line class="dim" x1="20" y1="566" x2="620" y2="566"/><text class="dim-t" x="320" y="563" text-anchor="middle">60 m (2 lotes)</text>
+        <line class="dim" x1="630" y1="20" x2="630" y2="520"/><text class="dim-t" x="626" y="270" text-anchor="end" transform="rotate(-90 626 270)">50 m</text>
+      </svg>
+    </div>
+    <figcaption>Planta esquemática, escala 1:500 aprox. Medidas supuestas de 60 × 50 m. Hay dos carriles de 5 m y horquillas con un diámetro exterior de 14 m, suficiente para el radio de giro de una Amarok (≈ 13 m entre paredes). El recorrido total ronda los 260 m. Los números marcan el orden de los obstáculos.</figcaption>
+  </figure>
+
+  <div style="display:grid;gap:14px">
+    <h3>Obstáculos · a validar con el pliego</h3>
+    <p class="muted" style="font-size:.93rem">Cada obstáculo lleva el nombre de una situación del campo y un cartel que dice qué sistema de la camioneta está trabajando. El LED del escenario muestra la telemetría de la unidad en pista: ángulo, inclinación y profundidad de agua.</p>
+    <ol class="obst">
+      <li><span class="n">1</span><span><b>Tranquera y guardaganado</b>Arranque sobre rejilla de caños. Suspensión y confort de marcha.</span></li>
+      <li><span class="n">2</span><span><b>Escalera de durmientes</b>Tres escalones de 25 cm con durmientes de quebracho. Tracción y control de ascenso.</span></li>
+      <li><span class="n">3</span><span><b>Puente de tablones</b>Balancín de 8 m. Precisión de dirección y visibilidad con cámaras 360°.</span></li>
+      <li><span class="n">4</span><span><b>La alcantarilla</b>Cruce de ejes con pozos alternados. Articulación y bloqueo de diferencial.</span></li>
+      <li><span class="n">5</span><span><b>La banquina</b>Rolido lateral de 25 a 30°. Estabilidad, con el inclinómetro proyectado en el LED.</span></li>
+      <li><span class="n">6</span><span><b>Horquilla del corral</b>Retorno de 14 m de diámetro exterior. Maniobrabilidad.</span></li>
+      <li><span class="n">7</span><span><b>La loma del silo</b>Rampa de 3 m de alto, subida y bajada a 30 %, contra la calle para que se vea desde afuera. Control de descenso.</span></li>
+      <li><span class="n">8</span><span><b>Huella después de la lluvia</b>Pileta de vadeo de barro y agua de 40 a 50 cm. Capacidad de vadeo.</span></li>
+      <li><span class="n">9</span><span><b>Camino de ripio</b>Piedra bola y ripio suelto. Control de tracción.</span></li>
+      <li><span class="n">10</span><span><b>Regreso al embarque</b>Horquilla de retorno y descenso con foto y video onboard enviados por QR.</span></li>
+    </ol>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b class="mono">≈ 260 m</b><span>longitud del circuito</span></div>
+    <div class="stat"><b class="mono">4</b><span>Amarok en pista a la vez, cada una con piloto</span></div>
+    <div class="stat"><b class="mono">≈ 140/h</b><span>acompañantes por hora (ciclo de 5 min, 3 por vuelta)</span></div>
+    <div class="stat"><b class="mono">≈ 4.500</b><span>personas en 4 días (8 h/día). En AgroActiva 2025 fueron 1.480.</span></div>
+  </div>
+  <p class="muted" style="font-size:.88rem">La capacidad es una estimación a confirmar con la productora de pista. Además hay que prever pilotos profesionales, ambulancia y médico, seguro específico, vallado de contención y una lona de lluvia para el vadeo.</p>
+</section>
+
+<!-- 7. ESCENARIO -->
+<section id="escenario">
+  <span class="eyebrow">07 · Escenario y develación</span>
+  <h2>Imponente de frente a la calle</h2>
+  <figure>
+    <div class="plan">
+      <svg viewBox="0 0 580 280" role="img" aria-label="Vista frontal del escenario">
+        <line x1="20" y1="240" x2="560" y2="240" stroke="var(--ink)" stroke-width="2"/>
+        <!-- truss roof -->
+        <rect x="40" y="44" width="480" height="10" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+        <path d="M40 54 L55 44 L70 54 L85 44 L100 54 L115 44 L130 54 L145 44 L160 54 L175 44 L190 54 L205 44 L220 54 L235 44 L250 54 L265 44 L280 54 L295 44 L310 54 L325 44 L340 54 L355 44 L370 54 L385 44 L400 54 L415 44 L430 54 L445 44 L460 54 L475 44 L490 54 L505 44 L520 54" fill="none" stroke="var(--muted)"/>
+        <rect x="40" y="54" width="8" height="167" fill="var(--muted)"/>
+        <rect x="512" y="54" width="8" height="167" fill="var(--muted)"/>
+        <!-- LED -->
+        <rect x="120" y="77" width="320" height="128" fill="var(--ink)"/>
+        <defs><linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--blue)"/><stop offset=".62" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--soil)"/></linearGradient></defs>
+        <rect x="126" y="83" width="308" height="116" fill="url(#dawn)" opacity=".9"/>
+        <circle cx="280" cy="170" r="22" fill="var(--accent-soft)" opacity=".9"/>
+        <rect x="126" y="170" width="308" height="29" fill="var(--soil)"/>
+        <rect x="56" y="77" width="44" height="144" fill="var(--ink)"/>
+        <rect x="460" y="77" width="44" height="144" fill="var(--ink)"/>
+        <!-- deck -->
+        <rect x="40" y="221" width="480" height="19" fill="var(--ink)"/>
+        <!-- silobolsas -->
+        <rect x="166" y="185" width="68" height="38" rx="18" fill="var(--ground)" stroke="var(--ink)"/>
+        <rect x="326" y="185" width="68" height="38" rx="18" fill="var(--ground)" stroke="var(--ink)"/>
+        <text x="200" y="208" text-anchor="middle" class="sub">silobolsa</text>
+        <text x="360" y="208" text-anchor="middle" class="sub">silobolsa</text>
+        <!-- dims -->
+        <line class="dim" x1="40" y1="258" x2="520" y2="258"/><text class="dim-t" x="280" y="272" text-anchor="middle">30 m · mitad del frente</text>
+        <line class="dim" x1="120" y1="68" x2="440" y2="68"/><text class="dim-t" x="280" y="64" text-anchor="middle">LED 20 × 8 m</text>
+        <line class="dim" x1="545" y1="44" x2="545" y2="240"/><text class="dim-t" x="540" y="146" text-anchor="end">≈ 12 m</text>
+        <text class="dim-t" x="78" y="232" text-anchor="middle" style="fill:var(--ground)">+1,2 m</text>
+      </svg>
+    </div>
+    <figcaption>Vista frontal esquemática. Alturas máximas a confirmar con el pliego de Expoagro.</figcaption>
+  </figure>
+  <div class="cols">
+    <div style="display:grid;gap:10px">
+      <h3>Ficha técnica</h3>
+      <ul class="plain">
+        <li>Tarima de 30 × 10 m a +1,2 m, con estructura portante para 2 unidades de ≈ 2,5 t cada una.</li>
+        <li>LED principal de 20 × 8 m, pitch 3,9 exterior, ≥ 5.500 nits para verse a pleno sol.</li>
+        <li>Dos alas LED verticales de 3 × 9 m, con la telemetría de pista y la cámara onboard.</li>
+        <li>Dos plataformas giratorias de Ø 6 m con carga para camioneta.</li>
+        <li>Dos rampas traseras al 1:6 hacia el carril interior de la pista.</li>
+        <li>Techo de truss de 32 × 12 m con media sombra, line array, niebla baja y sistema kabuki para soltar la bolsa.</li>
+        <li>Grupo electrógeno dedicado y UPS para el LED.</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h3>Develación · día 1 · 12 min</h3>
+      <div class="ros">
+        <div><time>00:00</time><p>El LED abre con el amanecer sobre un lote de soja y sonido de campo. Las dos silobolsas se iluminan desde adentro.</p></div>
+        <div><time>01:30</time><p>800.000 Amarok hechas en Pacheco. Pasan caras de dueños reales de todo el país.</p></div>
+        <div><time>04:30</time><p>Suben un productor dueño de Amarok y un operario de la planta de Pacheco, cada uno con su calador.</p></div>
+        <div class="peak"><time>06:00</time><p><b>El corte.</b> Cae la bolsa, sale la niebla, el LED se abre y las plataformas giran.</p></div>
+        <div><time>08:00</time><p>Datos técnicos en el LED: híbrida, potencia, capacidad de carga y remolque.</p></div>
+        <div class="peak"><time>10:00</time><p><b>La primera vuelta.</b> Las dos unidades bajan por las rampas y entran a la pista, con cámara onboard en pantalla.</p></div>
+        <div><time>12:00</time><p>Se abre la fila de la primera vuelta pública y la barra de prensa en la galería.</p></div>
+      </div>
+      <p class="muted" style="font-size:.9rem">Días 2 a 4: tres shows diarios (11:30, 14:00 y 16:30) con la vuelta de honor de un dueño invitado, charla de financiación con el banco socio y el sorteo de la unidad 1 de la edición bordada. El día 3 hay caravana de Amarok de todas las generaciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. LIFESTYLE -->
+<section id="almacen">
+  <span class="eyebrow">08 · Lifestyle y posventa</span>
+  <h2>Almacén VW</h2>
+  <p class="lead">Es un almacén de ramos generales en clave VW, con estanterías de madera, mostrador de chapa y balanza antigua como exhibidor. Todo lo que se exhibe se puede comprar en la tienda oficial y el QR lleva a cada producto.</p>
+  <div class="cols">
+    <div style="display:grid;gap:10px">
+      <h3>Lifestyle</h3>
+      <ul class="plain">
+        <li><b>Bicicletas VW:</b> MTB Highline, MTB Starter, Urbana y Plegable. La MTB se muestra montada en una Amarok con portabicicletas.</li>
+        <li><b>Indumentaria de trabajo y campo:</b> gorras, camisas, camperas y chalecos.</li>
+        <li><b>Ritual:</b> mate, termo, conservadora y set de parrilla con la marca.</li>
+        <li><b>Chicos:</b> Amarok a escala y a batería para la familia rural.</li>
+      </ul>
+      <p class="muted" style="font-size:.88rem">El surtido es una propuesta. Hay que cruzarlo con el catálogo vigente de VW.</p>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h3>Posventa y accesorios</h3>
+      <ul class="plain">
+        <li><b>Accesorios originales Amarok:</b> lona marítima, cobertor de caja, barra deportiva, estribos, enganche de remolque, protector de cárter y portabicicletas.</li>
+        <li><b>Box abierto:</b> Amarok en elevador con un técnico de la red. Se explican el plan de mantenimiento, los repuestos originales y la garantía extendida.</li>
+        <li><b>Shell Helix:</b> retomamos la sociedad de 2025 y 2026, con lubricantes en el box y branding en la pista.</li>
+        <li><b>Turno de service por QR</b> en el concesionario más cercano al campo del visitante.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9. PRENDAS -->
+<section id="prendas">
+  <span class="eyebrow">09 · Prendas</span>
+  <h2>Prendas que se ganan, no que se regalan</h2>
+  <p class="lead">En AgroActiva 2025 faltó merchandising de recuerdo. Acá cada prenda tiene una historia y un mecanismo detrás, y todas pasan por un registro con QR.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Prenda</th><th>Cómo se obtiene</th><th>Por qué funciona</th></tr></thead>
+      <tbody>
+        <tr><td><b>Gorra de la Primera Vuelta</b></td><td>Al bajar de la pista. Va bordada con el número de vuelta ("Vuelta 0.001 / Expoagro 2027").</td><td>Es numerada y limitada, como la Unlimited, y se ve en el predio los cuatro días.</td></tr>
+        <tr><td><b>Bordado de marca de hacienda</b></td><td>En el Almacén, con máquina de bordado en vivo. El productor lleva su marca registrada y se la bordan en gorra o camisa.</td><td>Personaliza con algo que solo tiene el productor, y genera fila y contenido en redes.</td></tr>
+        <tr><td><b>Bolsa del corte</b></td><td>Se hace con el film del silobolsa de la develación, cosido y numerado. Se entrega a clientes que agendan test drive.</td><td>Cierra el concepto: la pieza que reveló la camioneta se la lleva el cliente, y el material se reutiliza.</td></tr>
+        <tr><td><b>Chaleco Tierra Nueva</b></td><td>Para quien firma reserva u operación en el pabellón.</td><td>Premio de cierre que el vendedor puede usar como argumento.</td></tr>
+        <tr><td><b>Uniforme del staff</b></td><td>Camisa de trabajo y chaleco en lugar de traje.</td><td>El vendedor se parece al cliente y queda a su altura.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 10. PRESENTACIÓN -->
+<section id="presentacion">
+  <span class="eyebrow">10 · Cómo presentarlo a VW</span>
+  <h2>Orden del pitch y renders</h2>
+  <div class="cols">
+    <ol class="plain" style="padding-left:1.3em">
+      <li><b>El momento:</b> 250.000 visitantes y la nueva Amarok saliendo de Pacheco.</li>
+      <li><b>La idea en una imagen:</b> el render del corte del silobolsa.</li>
+      <li><b>Cómo se vive:</b> ver, probar, cerrar y llevarse, en ese orden.</li>
+      <li><b>Plantas y aérea:</b> las dos plantas con la aérea 3/4.</li>
+      <li><b>Pista:</b> los obstáculos con sus situaciones de campo y la capacidad.</li>
+      <li><b>Negocio:</b> captura de leads, 12 escritorios y financiación.</li>
+      <li><b>KPIs y cronograma.</b></li>
+    </ol>
+    <div style="display:grid;gap:10px">
+      <h3>KPIs propuestos</h3>
+      <ul class="plain">
+        <li>≈ 4.500 vueltas en pista.</li>
+        <li>100 % de participantes registrados con QR (en 2025 no había registro).</li>
+        <li>Leads calificados por día y test drives agendados en concesionario.</li>
+        <li>Reservas firmadas en el pabellón.</li>
+        <li>Alcance de prensa del día 1 y contenido generado por usuarios con la gorra y la bolsa.</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Seis renders para encargar</h3>
+  <div class="renders">
+    <div class="render"><h4>1 · Aérea 3/4 del conjunto</h4><code>Aerial 3/4 view, agricultural fair in the Argentine pampas, two adjacent plots: left an automotive pavilion with glass box, terraced earth mound with five pickups at the front; right a closed 4x4 dirt track circling a large LED stage facing the street, crowd, midday sun, photoreal</code></div>
+    <div class="render"><h4>2 · La Loma desde la calle</h4><code>Eye-level view from fair street, terraced grass-and-stubble mound 2.4 m high with five pickup trucks, the top one angled on the summit, low sun rim light, visitors with caps, photoreal, 35mm</code></div>
+    <div class="render"><h4>3 · El corte</h4><code>Outdoor stage 30 m wide, giant white silo bag with camouflage print falling away from a pickup on a turntable, low fog, 20x8 m LED screen showing sunrise over a soybean field, farmer and factory worker holding grain probes, crowd, photoreal</code></div>
+    <div class="render"><h4>4 · Pabellón y galería</h4><code>Interior of an elegant glazed pavilion, warm wood deck gallery with leather lounges and a mate bar, sales office with 12 desks in three islands, view out to pickups on display, air-conditioned calm, architectural photo</code></div>
+    <div class="render"><h4>5 · Almacén VW</h4><code>General-store style boutique of corrugated metal and wood shelves, branded mountain bikes, workwear caps and vests, live embroidery machine stitching a cattle brand onto a cap, warm light</code></div>
+    <div class="render"><h4>6 · La loma del silo</h4><code>Pickup truck cresting a 3 m dirt ramp at 30% grade next to a fair street, passengers inside, spectators behind a barrier, telemetry graphics on a nearby LED wing, dust, action photo</code></div>
+  </div>
+  <p class="muted" style="font-size:.88rem">Los prompts sirven de guía para el estudio de renders o para una primera ronda con IA. Antes de mostrarlos, hay que reemplazar las camionetas genéricas por los modelos 3D oficiales de VW.</p>
+</section>
+
+<!-- 11. CRONOGRAMA -->
+<section id="cronograma">
+  <span class="eyebrow">11 · Cronograma</span>
+  <h2>De octubre a marzo</h2>
+  <div class="tbl" style="padding:14px">
+    <div class="gantt">
+      <div class="grow ghead"><span style="border:0"></span><span style="grid-column:span 4">Oct</span><span style="grid-column:span 4">Nov</span><span style="grid-column:span 4">Dic</span><span style="grid-column:span 4">Ene</span><span style="grid-column:span 4">Feb</span><span style="grid-column:span 4">Mar</span></div>
+      <div class="grow"><span>Aprobación de concepto</span><span class="bar" style="grid-column:2 / span 3"></span></div>
+      <div class="grow"><span>Renders y anteproyecto</span><span class="bar" style="grid-column:3 / span 4"></span></div>
+      <div class="grow"><span>Ejecutivo + presentación a Exponenciar</span><span class="bar" style="grid-column:6 / span 4"></span></div>
+      <div class="grow"><span>Producción en taller</span><span class="bar s" style="grid-column:10 / span 10"></span></div>
+      <div class="grow"><span>Silobolsas, prendas, bordado</span><span class="bar s" style="grid-column:12 / span 7"></span></div>
+      <div class="grow"><span>Movimiento de suelo y pista</span><span class="bar s" style="grid-column:19 / span 2"></span></div>
+      <div class="grow"><span>Montaje en predio</span><span class="bar" style="grid-column:20 / span 3"></span></div>
+      <div class="grow"><span>Ensayo de develación</span><span class="bar a" style="grid-column:22 / span 1"></span></div>
+      <div class="grow"><span>Expoagro 9–12 mar</span><span class="bar a" style="grid-column:23 / span 1"></span></div>
+      <div class="grow"><span>Desarme</span><span class="bar s" style="grid-column:24 / span 1"></span></div>
+    </div>
+  </div>
+  <p class="muted" style="font-size:.88rem">Cada columna es una semana. Las ventanas de montaje y desarme se ajustan al reglamento de Exponenciar.</p>
+</section>
+
+<!-- 12. PENDIENTES -->
+<section id="pendientes">
+  <span class="eyebrow">12 · Para cerrar</span>
+  <h2>Lo que necesito para la versión 2</h2>
+  <ul class="plain">
+    <li><b>Fotos y plano de los tres lotes:</b> frente, fondo, orientación, calles, desniveles y árboles.</li>
+    <li><b>Pliego de pista:</b> obstáculos permitidos, alturas, vadeo, seguridad y velocidad máxima.</li>
+    <li><b>Reglamento de Exponenciar:</b> alturas máximas (tótem, LED, techo), potencia eléctrica, sonido y horarios de montaje.</li>
+    <li><b>VW:</b> confirmación de las 2 unidades a develar, su embargo de prensa y el portafolio y las versiones de marzo de 2027.</li>
+    <li><b>Socios:</b> Shell Helix (pista y box) y el banco o financiera del plan de feria.</li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <span class="eyebrow">Fuentes</span>
+  <ol class="src">
+    <li><a href="https://www.expoagro.com.ar/evento/expoagro-2027/">Expoagro 2027 · 9 al 12 de marzo (sitio oficial)</a></li>
+    <li><a href="https://www.edicionrural.com/2026/03/13/expoagro-2026-bate-records-mas-de-250-mil-visitantes-y-pedidos-de-credito-por-us10-000-millones/">Edición Rural · Expoagro 2026 bate récords</a></li>
+    <li><a href="https://elsurdiario.com.ar/articulo/expoagro-2026-abre-sus-puertas-con-mas-de--700-expositores-y-fuerte-presencia-santafesina.php">Sur Multimedios · más de 700 expositores</a></li>
+    <li><a href="https://supertruck.com.ar/noticias/volkswagen-expoagro-2026-financiacion-especial-para-camiones-y-amarok/">Supertruck · VW en Expoagro 2026</a></li>
+    <li><a href="https://mercado.com.ar/agenda/volkswagen-argentina-exhibira-su-gama-comercial-y-posventa-en-expoagro-2026/">Revista Mercado · VW gama comercial y posventa 2026</a></li>
+    <li><a href="https://www.infobae.com/inhouse/2026/03/12/las-novedades-de-la-industria-automotriz-se-exhiben-en-la-feria-del-agro-mas-importante-del-ano/">Infobae · automotrices en Expoagro 2026 (Grupo Antelo 9.000 m²)</a></li>
+    <li><a href="https://www.ford.com.ar/agroactiva/">Ford Argentina · AgroActiva 2026</a></li>
+    <li><a href="https://examedia.com.ar/portada/post/87906268">Examedia · Zona Off Road Expo Rural 2026</a></li>
+    <li><a href="https://www.agrositio.com.ar/noticia/247970-volkswagen-avanza-con-la-nueva-amarok-se-presento-el-diseno-de-la-pick-up-que-llegara-en-2027.html">Agrositio · nueva Amarok, US$ 580 M en Pacheco</a></li>
+    <li><a href="https://autotest.com.ar/noticias/volkswagen-mostro-en-publico-la-nueva-amarok-sera-hibrida-y-tendra-mas-de-470-cv-para-competir-contra-toyota-hilux/">Autotest · nueva Amarok híbrida, más de 470 CV</a></li>
+    <li><a href="https://parabrisas.perfil.com/noticias/autos/nueva-volkswagen-amarok-2027-pick-up-fue-presentada-camuflada-argentina-brasil.phtml">Parabrisas · Amarok 2027 presentada camuflada</a></li>
+    <li><a href="https://autoblog.com.ar/lanzamiento-volkswagen-amarok-v6-unlimited-2026/">Autoblog · Amarok V6 Unlimited</a></li>
+    <li><a href="https://www.lagaceta.com.ar/nota/1132331/sociedad/precios-volkswagen-2026-estos-son-modelos-no-aumentaron-abril.html">La Gaceta · gama y precios VW 2026</a></li>
+    <li><a href="https://www.volkswagen.com.ar/es/modelos/nueva-amarok.html">Volkswagen Argentina · Amarok</a></li>
+    <li><a href="https://postventa-accesorios.vwcontenidos.com.ar/accesorios/modelo/amarok">VW Accesorios originales · Amarok</a></li>
+    <li><a href="https://www.16valvulas.com.ar/volkswagen-argentina-lanzo-la-tienda-oficial-de-repuestos-y-accesorios-en-mercado-libre/">16 Válvulas · tienda oficial VW y bicicletas</a></li>
+    <li><a href="https://www.oemoffhighway.com/market-analysis/industry-news/agriculture/article/22955340/agritechnica-agritechnica-2025-attracts-nearly-476000-visitors">OEM Off-Highway · Agritechnica 2025</a></li>
+    <li><a href="https://www.farmprogress.com/farm-progress-show/get-behind-the-wheel-at-farm-progress-show-s-ride-and-drive">Farm Progress · Ride &amp; Drive</a></li>
+    <li><a href="https://www.toyotacomunica.com.br/toyota-apresenta-hilux-movida-a-biometano-pela-primeira-vez-ao-publico-na-agrishow-2025/">Toyota Comunica · Hilux biometano en Agrishow 2025</a></li>
+    <li><a href="https://autotalk.co.nz/toyota-nz-returns-to-fieldays-with-house-of-hilux/">Autotalk · Toyota "House of Hilux" en Fieldays</a></li>
+    <li>Reporte Experiencia AgroActiva 2025 (VW + Shell), Google Drive interno</li>
+  </ol>
+</section>
+
+<footer>Borrador de trabajo del Área de Eventos. Las plantas son esquemáticas y las cifras de 2026 provienen de prensa. Todo se valida con el pliego, el reglamento de Exponenciar y VW Argentina.</footer>
+</div>
